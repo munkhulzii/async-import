@@ -31,7 +31,7 @@ class ValidationException extends LocalizedException implements AggregateExcepti
      * @param int $code
      * @param ValidationResult|null $validationResult
      */
-    public function __construct(
+    public function     __construct(
         Phrase $phrase,
         \Exception $cause = null,
         $code = 0,

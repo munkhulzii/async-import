@@ -9,6 +9,7 @@ namespace Magento\AsynchronousImportCsv\Model;
 
 use Magento\AsynchronousImportCsvApi\Api\Data\CsvFormatInterface;
 use Magento\AsynchronousImportCsvApi\Model\DataParserInterface;
+use Exception;
 
 /**
  * @inheritdoc
@@ -35,12 +36,19 @@ class DataParser implements DataParserInterface
      */
     public function execute(array $data, CsvFormatInterface $csvFormat = null): array
     {
-        $this->csvDelimiter = ($csvFormat->getDelimiter() ?: CsvFormatInterface::DEFAULT_DELIMITER);
-        $this->csvEnclosure = ($csvFormat->getEnclosure() ?: CsvFormatInterface::DEFAULT_ENCLOSURE);
-        $this->csvEscape = ($csvFormat->getEscape() ?: CsvFormatInterface::DEFAULT_ESCAPE);
-
-        return array_map(function ($data) {
-            return str_getcsv($data, $this->csvDelimiter, $this->csvEnclosure, $this->csvEscape);
-        }, $data);
+        $parsedData = [];
+        $headerValues = [];
+        foreach ($data as $index => $row) {
+            $rowParsed = str_getcsv($row, $csvFormat->getDelimiter(), $csvFormat->getEnclosure(), $csvFormat->getEscape());
+            if ($index == 0) {
+                $headerValues = $rowParsed;
+                continue;
+            }
+            if (count($headerValues) != count($rowParsed)) {
+                throw new Exception(__('Wrong amount of column in line %1', $index));
+            }
+            $parsedData[] = array_combine($headerValues, $rowParsed);
+        }
+        return $parsedData;
     }
 }

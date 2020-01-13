@@ -19,6 +19,7 @@
             <argument name="ruleApplyingStrategies" xsi:type="array">
                 <item name="uppercase_first_character" xsi:type="object">Magento\AsynchronousImportDataConverting\Model\RuleApplyingStrategy\UppercaseFirstCharacter\Proxy</item>
                 <item name="remove_field" xsi:type="object">Magento\AsynchronousImportDataConverting\Model\RuleApplyingStrategy\RemoveField\Proxy</item>
+                <item name="rename_field" xsi:type="object">Magento\AsynchronousImportDataConverting\Model\RuleApplyingStrategy\RenameField\Proxy</item>
                 <item name="uppercase_string" xsi:type="object">Magento\AsynchronousImportDataConverting\Model\RuleApplyingStrategy\UppercaseString\Proxy</item>
                 <item name="string_replace" xsi:type="object">Magento\AsynchronousImportDataConverting\Model\RuleApplyingStrategy\StringReplace\Proxy</item>
                 <item name="yes_no_to_bool" xsi:type="object">Magento\AsynchronousImportDataConverting\Model\RuleApplyingStrategy\YesNoToBool\Proxy</item>
@@ -32,6 +33,7 @@
             <argument name="validators" xsi:type="array">
                 <item name="string_replace_parameters" xsi:type="object">Magento\AsynchronousImportDataConverting\Model\ConvertingRuleValidator\StringReplaceParametersValidator</item>
                 <item name="identifier" xsi:type="object">Magento\AsynchronousImportDataConverting\Model\ConvertingRuleValidator\IdentifierValidator</item>
+                <item name="rename_field_parameters" xsi:type="object">Magento\AsynchronousImportDataConverting\Model\ConvertingRuleValidator\RenameFieldParametersValidator</item>
             </argument>
         </arguments>
     </type>
@@ -40,6 +42,7 @@
             <argument name="rulesForWhichApplyToIsRequired" xsi:type="array">
                 <item name="uppercase_first_character" xsi:type="string">uppercase_first_character</item>
                 <item name="remove_field" xsi:type="string">remove_field</item>
+                <item name="rename_field" xsi:type="string">rename_field</item>
                 <item name="uppercase_string" xsi:type="string">uppercase_string</item>
                 <item name="string_replace" xsi:type="string">string_replace</item>
                 <item name="lowercase_string" xsi:type="string">lowercase_string</item>
